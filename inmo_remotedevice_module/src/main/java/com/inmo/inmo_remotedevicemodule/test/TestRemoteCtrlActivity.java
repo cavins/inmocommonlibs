@@ -1,5 +1,6 @@
 package com.inmo.inmo_remotedevicemodule.test;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -7,8 +8,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import com.inmo.inmo_remotedevicemodule.R;
+import com.inmo.inmo_remotedevicemodule.databinding.ActivityTestremotectrlBinding;
 import com.inmo.inmo_remotedevicemodule.decorate.RemoteConctrlActivity;
 
 /**
@@ -16,28 +19,26 @@ import com.inmo.inmo_remotedevicemodule.decorate.RemoteConctrlActivity;
  * 测试代码逻辑的GUI
  */
 public class TestRemoteCtrlActivity extends RemoteConctrlActivity {
+    ActivityTestremotectrlBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_testremotectrl);
         setContentView(R.layout.activity_testremotectrl);
 
         setNotifyMode(MotionEvent.ACTION_DOWN);
     }
 
     public void testInputKey(View view) {
-        switch (view.getId()) {
-            case R.id.backBt:
-                onKeyDown(4, new KeyEvent(MotionEvent.ACTION_DOWN, 4));
-                break;
-            case R.id.centerBt:
-                onKeyDown(292, new KeyEvent(MotionEvent.ACTION_DOWN, 292));
-                break;
-            case R.id.nextBt:
-                onKeyDown(290, new KeyEvent(MotionEvent.ACTION_DOWN, 290));
-                break;
-            case R.id.previousBt:
-                onKeyDown(291, new KeyEvent(MotionEvent.ACTION_DOWN, 291));
-                break;
+        if (view.getId() == binding.backBt.getId()) {
+            onKeyDown(4, new KeyEvent(MotionEvent.ACTION_DOWN, 4));
+        } else if (view.getId() == binding.centerBt.getId()) {
+            onKeyDown(292, new KeyEvent(MotionEvent.ACTION_DOWN, 292));
+        } else if (view.getId() == binding.nextBt.getId()) {
+            onKeyDown(290, new KeyEvent(MotionEvent.ACTION_DOWN, 290));
+        } else if (view.getId() == binding.previousBt.getId()) {
+            onKeyDown(291, new KeyEvent(MotionEvent.ACTION_DOWN, 291));
         }
     }
 

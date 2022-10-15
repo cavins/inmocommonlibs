@@ -7,7 +7,7 @@ public class DeviceSupportActions {
     /**
      * 系统全局返回
      */
-    public static final String ACTION_BACK = "back";
+    public static final String ACTION_BACK = "BACK";
 
     /**
      * 系统全局确定
