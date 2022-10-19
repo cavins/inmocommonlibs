@@ -1,6 +1,5 @@
 package com.inmo.inmo_remotedevicemodule.test;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -27,6 +26,7 @@ public class TestRemoteCtrlActivity extends RemoteConctrlActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_testremotectrl);
         setContentView(R.layout.activity_testremotectrl);
 
+        //设置按键按下时响应还是抬起时响应
         setNotifyMode(MotionEvent.ACTION_DOWN);
     }
 
@@ -39,6 +39,10 @@ public class TestRemoteCtrlActivity extends RemoteConctrlActivity {
             onKeyDown(290, new KeyEvent(MotionEvent.ACTION_DOWN, 290));
         } else if (view.getId() == binding.previousBt.getId()) {
             onKeyDown(291, new KeyEvent(MotionEvent.ACTION_DOWN, 291));
+        } else if (view.getId() == binding.downBt.getId()) {
+            onKeyDown(KeyEvent.KEYCODE_DPAD_DOWN, new KeyEvent(MotionEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN));
+        } else if (view.getId() == binding.upBt.getId()) {
+            onKeyDown(KeyEvent.KEYCODE_DPAD_UP, new KeyEvent(MotionEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_UP));
         }
     }
 
@@ -68,4 +72,17 @@ public class TestRemoteCtrlActivity extends RemoteConctrlActivity {
         Toast.makeText(TestRemoteCtrlActivity.this, "onControllerPreEvent", Toast.LENGTH_SHORT).show();
 
     }
+
+    @Override
+    protected void onControllerDpadDownEvent() {
+        super.onControllerDpadDownEvent();
+        Toast.makeText(TestRemoteCtrlActivity.this, "onDpadDownKeyEvent", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onControllerDpadUpEvent() {
+        super.onControllerDpadUpEvent();
+        Toast.makeText(TestRemoteCtrlActivity.this, "onDpadUpKeyEvent", Toast.LENGTH_SHORT).show();
+    }
+
 }

@@ -9,7 +9,9 @@ import com.inmo.inmo_remotedevicemodule.RemoteDevManager;
 
 /**
  * @author lijianwen 2022.10.14
- * 封装了远程设备如戒指等设备的activity，可以按需索取需要的事件进行处理
+ * 封装了远程设备如戒指等设备的activity
+ * 使用了抽象类处理，UI上层可以按照需求实现单独键值，
+ * 比如某个页面只需要处理返回键值，不需要处理其他键值的话，可以只实现onControllerBackEvent即可，简化代码
  */
 public abstract class RemoteConctrlActivity extends AppCompatActivity implements RemoteDevManager.OnDevKeyUIEventListener {
 
@@ -53,6 +55,16 @@ public abstract class RemoteConctrlActivity extends AppCompatActivity implements
         onControllerPreEvent();
     }
 
+    @Override
+    public void onDpadDownKeyEvent() {
+        onControllerDpadDownEvent();
+    }
+
+    @Override
+    public void onDpadUpKeyEvent() {
+        onControllerDpadUpEvent();
+    }
+
     protected void onControllerBackEvent() {
     }
 
@@ -66,6 +78,14 @@ public abstract class RemoteConctrlActivity extends AppCompatActivity implements
 
 
     protected void onControllerPreEvent() {
+    }
+
+    protected void onControllerDpadDownEvent() {
+
+    }
+
+    protected void onControllerDpadUpEvent() {
+
     }
 
 

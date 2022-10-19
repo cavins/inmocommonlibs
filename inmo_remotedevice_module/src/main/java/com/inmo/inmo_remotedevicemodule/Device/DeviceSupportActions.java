@@ -23,4 +23,14 @@ public class DeviceSupportActions {
      * 系统全局上一步
      */
     public static final String ACTION_PREVIOUS = "PREVIOUS";
+
+    /**
+     * 系统全局上键
+     */
+    public static final String ACTION_UP = "UP";
+
+    /**
+     * 系统全局下键
+     */
+    public static final String ACTION_DOWN = "DOWN";
 }

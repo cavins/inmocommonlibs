@@ -1,7 +1,7 @@
 project.ext {
     //是否允许module单独调试
-    isModuleDebug = false
-    moduleName = ""//单独调试module名
+    isModuleDebug = true
+    moduleName = "inmo_remotedevice_module"//单独调试module名
     //基础信息配置
     compileSdkVersion = 30
     buildToolsVersion = "30.0.3"

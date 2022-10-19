@@ -49,6 +49,26 @@
             android:onClick="testInputKey"
             android:text="模拟戒指上一步键" />
 
+        <Button
+            android:id="@+id/downBt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/previousBt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:onClick="testInputKey"
+            android:text="模拟戒指下键" />
+
+        <Button
+            android:id="@+id/upBt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/downBt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:onClick="testInputKey"
+            android:text="模拟戒指上键" />
+
 
     </RelativeLayout>
 </layout>

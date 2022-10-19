@@ -4,6 +4,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import com.inmo.inmo_remotedevicemodule.Device.Air1Ring;
+import com.inmo.inmo_remotedevicemodule.Device.Air2Ring;
 import com.inmo.inmo_remotedevicemodule.Device.Device;
 import com.inmo.inmo_remotedevicemodule.Device.DeviceSupportActions;
 
@@ -23,6 +24,8 @@ public class RemoteDevManager {
     private List<Integer> enterKeys;//确定键合集
     private List<Integer> nextKeys;//下一步键合集
     private List<Integer> preKeys;//上一步键合集
+    private List<Integer> downKeys;//上键合集
+    private List<Integer> upKeys;//下键合集
     private Map<String, List> keysMap;
 
     private static RemoteDevManager instance;
@@ -44,6 +47,7 @@ public class RemoteDevManager {
         this.listener = listener;
         supportDevices = new ArrayList<>();
         supportDevices.add(new Air1Ring());
+        supportDevices.add(new Air2Ring());
         loadAllKeys();
     }
 
@@ -56,23 +60,29 @@ public class RemoteDevManager {
     }
 
     private void loadAllKeys() {
-        keysMap = new HashMap<>(4);
+        keysMap = new HashMap<>();
         backKeys = new ArrayList<>();
         enterKeys = new ArrayList<>();
         nextKeys = new ArrayList<>();
         preKeys = new ArrayList<>();
+        downKeys = new ArrayList<>();
+        upKeys = new ArrayList<>();
 
         for (Device dev : supportDevices) {
             backKeys.add(dev.getBackKey());
             enterKeys.add(dev.getEnterKey());
             nextKeys.add(dev.getNextKey());
             preKeys.add(dev.getPreKey());
+            downKeys.add(dev.getDownKey());
+            upKeys.add(dev.getUpKey());
         }
 
         keysMap.put(DeviceSupportActions.ACTION_BACK, backKeys);
         keysMap.put(DeviceSupportActions.ACTION_ENTER, enterKeys);
         keysMap.put(DeviceSupportActions.ACTION_NEXT, nextKeys);
         keysMap.put(DeviceSupportActions.ACTION_PREVIOUS, preKeys);
+        keysMap.put(DeviceSupportActions.ACTION_DOWN, downKeys);
+        keysMap.put(DeviceSupportActions.ACTION_UP, upKeys);
 
     }
 
@@ -90,7 +100,7 @@ public class RemoteDevManager {
         final List<Integer> actionsSrc = keysMap.get(action);
         if (actionsSrc != null) {
             for (Integer actionKey : actionsSrc) {
-                if (keyCode == actionKey) {
+                if (actionKey > 0 && keyCode == actionKey) {
                     notifyUi(action);
                 }
             }
@@ -114,6 +124,12 @@ public class RemoteDevManager {
             case DeviceSupportActions.ACTION_PREVIOUS:
                 listener.onPreEvent();
                 break;
+            case DeviceSupportActions.ACTION_DOWN:
+                listener.onDpadDownKeyEvent();
+                break;
+            case DeviceSupportActions.ACTION_UP:
+                listener.onDpadUpKeyEvent();
+                break;
         }
     }
 
@@ -125,5 +141,9 @@ public class RemoteDevManager {
         void onNextEvent();
 
         void onPreEvent();
+
+        void onDpadDownKeyEvent();
+
+        void onDpadUpKeyEvent();
     }
 }
