@@ -16,6 +16,8 @@ import com.inmo.inmo_remotedevicemodule.decorate.RemoteConctrlActivity;
 /**
  * @author lijianwen
  * 测试代码逻辑的GUI
+ * 使用了抽象类处理，UI上层可以按照需求实现单独键值，
+ * 比如某个页面只需要处理返回键值，不需要处理其他键值的话，可以只实现onControllerBackEvent即可，简化代码
  */
 public class TestRemoteCtrlActivity extends RemoteConctrlActivity {
     ActivityTestremotectrlBinding binding;
@@ -45,6 +47,7 @@ public class TestRemoteCtrlActivity extends RemoteConctrlActivity {
             onKeyDown(KeyEvent.KEYCODE_DPAD_UP, new KeyEvent(MotionEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_UP));
         }
     }
+
 
     @Override
     protected void onControllerBackEvent() {

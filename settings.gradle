@@ -2,5 +2,5 @@ include ':inmo_update_module'
 include ':inmo_remotedevice_module'
 include ':common'
 include ':inmo_tp_module'
-include ':app'
+include ':sample'
 rootProject.name = "Commonlibs"
