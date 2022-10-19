@@ -28,6 +28,11 @@ public class RemoteDevManager {
     private List<Integer> upKeys;//下键合集
     private Map<String, List> keysMap;
 
+    /**
+     * 默认按键按下时触发,可以手动设置
+     */
+    private int notifyMode = MotionEvent.ACTION_DOWN;
+
     private static RemoteDevManager instance;
 
     public static RemoteDevManager getInstance(OnDevKeyUIEventListener listener) {
@@ -40,8 +45,6 @@ public class RemoteDevManager {
         }
         return instance;
     }
-
-    private int notifyMode = MotionEvent.ACTION_DOWN;//默认按键按下时触发
 
     private RemoteDevManager(OnDevKeyUIEventListener listener) {
         this.listener = listener;

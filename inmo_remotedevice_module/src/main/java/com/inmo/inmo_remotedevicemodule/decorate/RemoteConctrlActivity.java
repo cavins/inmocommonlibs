@@ -17,7 +17,7 @@ public abstract class RemoteConctrlActivity extends AppCompatActivity implements
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (RemoteDevManager.getInstance(this).getNotifyMode() == MotionEvent.ACTION_DOWN) {
+        if (getDefault().getNotifyMode() == MotionEvent.ACTION_DOWN) {
             getDefault().inputKeyEvent(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
